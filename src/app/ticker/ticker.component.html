@@ -1,0 +1,30 @@
+<div class="ticker">
+  <ce-page-title 
+    [textMain]="ticker.name"
+    [textExtra]="ticker.id" 
+    [iconPath]="ticker.iconPath"
+  ></ce-page-title>
+
+  <div class="ticker-data" >
+    <section class="data-section">
+      <h3 class="section-header">coin properties</h3>
+      @for (property of ticker | keyvalue; track $index) {
+        @if (!excludedProperties.includes(property.key)) {
+          <div class="property"> 
+            <span class="property-name">{{property.key}}: </span>{{property.value}}
+          </div>
+        }
+      }
+    </section>
+
+    <section class="data-section">
+      <h3 class="section-header">coin quotes</h3>
+      @for (property of ticker.quotes.USD | keyvalue; track $index) {
+        <div class="property"> 
+          <span class="property-name">{{property.key}}:</span> {{property.value}}
+        </div>
+      }
+    </section>
+
+  </div>
+</div>

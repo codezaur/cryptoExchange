@@ -1,0 +1,60 @@
+@import 'src/styles/variables.scss';
+
+.header {
+  padding: 1% 7%;
+  display: flex;
+  justify-content: space-between;
+  .nav {
+    display: flex;
+    align-items: center;
+    & >* {
+      margin-right: 24px;
+    }
+    .links {
+      display: flex;
+      .link {
+        list-style-type: none;
+        margin-right: 24px;
+        cursor: pointer;
+        color: $gray;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .button {
+    min-height: 30px;
+    min-width: 90px;
+    border-radius: 8px;
+    background-color: $primary;
+    color: $white;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    margin-left: 24px;
+  }
+
+  .buttons {
+    display: flex;
+    .button {
+      max-height: 30px;
+      min-width: 90px;
+      border-radius: 8px;
+      background-color: $primary;
+      color: $white;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 400;
+      margin-left: 24px;
+    }
+
+    .button-ghost {
+      @extend .button; 
+      color: $primary;
+      background-color: $white;
+      border: 1px solid $primary;
+    }
+  }
+}

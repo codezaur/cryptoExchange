@@ -1,0 +1,17 @@
+<div class="page-title">
+
+  <div class="main-text">
+    <h1 class="header">{{ textMain }}</h1>
+    @if (iconPath) {
+      <img src="{{iconPath}}" alt="icon" class="header-icon">
+    } 
+  </div>
+
+  @if (textExtra) { 
+    <p>{{ textExtra }}</p> 
+  }
+
+  <ng-content></ng-content>
+
+</div>
+

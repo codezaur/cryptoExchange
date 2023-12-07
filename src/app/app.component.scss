@@ -1,0 +1,9 @@
+.app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .outlet {
+    height: calc(100% - 81px);
+    overflow-y: scroll;
+  }
+}

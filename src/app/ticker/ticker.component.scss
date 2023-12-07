@@ -1,0 +1,27 @@
+@import 'src/styles/variables.scss';
+
+.ticker {
+  .ticker-data {
+    padding: 1% 7%;
+    display: flex;
+    align-items: flex-start;
+    .data-section {
+
+      width: 50%;
+      .section-header {
+        margin-bottom: 3%;
+      }
+      .property {
+        min-height: 30px;
+        padding-top: 2%;
+        border-bottom: 1px solid lighten($color: $gray, $amount: 45);
+        .property-name {
+          font-weight: 700;
+        }
+        &:hover {
+          background-color: $gray-01;
+        }
+      }
+    }
+  }
+}

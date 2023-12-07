@@ -1,0 +1,17 @@
+.page-title {
+  text-align: center;
+  padding-bottom: 6%;;
+  .main-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .header {
+      margin-bottom: 11px;
+    }
+    .header-icon {
+      height: 36px;
+      margin: 0 1%;
+    } 
+  }
+}
+
