@@ -1,0 +1,105 @@
+<div class="tickers-list" >
+  <ce-page-title  *ngIf="$globalMarketCap | async as cap"
+    [textMain]="'Today\'s Cryptocurrency Prices'">
+  <p>The global crypto market cap is 
+    <span class="bold">{{cap | numberSymbol}} </span>
+  </p>
+  </ce-page-title>
+
+  <ng-container *ngIf="$tickers | async as tickers; else loading"> 
+    <table 
+    mat-table
+    [dataSource]="tickers" 
+    class="mat-elevation-z8 table">
+ 
+    <ng-container matColumnDef="favourite">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <img 
+        (click)="toggleFavourite($event, element.id)"
+        [src]="'assets/icons/' + (favouriteTickers.includes(element.id) ? 'star-filled.svg' : 'star.svg') "
+        alt="favourite-icon" 
+        class="favourite-icon"
+        >
+      </td>
+    </ng-container>   
+
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef> # </th>
+      <td mat-cell *matCellDef="let element; let i = index;">
+        {{i + 1}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="coin">
+          <img 
+            src="{{element.iconPath}}" 
+            alt="coin-icon" 
+            class="coin-icon"
+            (error)="loadDefaultIcon(element)"
+            >
+          <span class="bold">{{ element.name }}</span>
+          <span class="coin-symbol">{{element.symbol}}</span>
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.quotes.USD.price | currency:'USD' | commaToSpace}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="1h%">
+      <th mat-header-cell *matHeaderCellDef> 1h% </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.quotes.USD.percent_change_1h }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="24h%">
+      <th mat-header-cell *matHeaderCellDef> 24h% </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.quotes.USD.percent_change_24h }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="7d%">
+      <th mat-header-cell *matHeaderCellDef> 7d% </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.quotes.USD.percent_change_7d }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="marketCap">
+      <th mat-header-cell *matHeaderCellDef> Market Cap </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.quotes.USD.market_cap  | numberWithSpaces}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="volume">
+      <th mat-header-cell *matHeaderCellDef> Volume (24h) </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.quotes.USD.volume_24h | numberWithSpaces}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="circulatingSupply">
+      <th mat-header-cell *matHeaderCellDef> Circulating Supply </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.circulating_supply | numberWithSpaces}}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tickersColumns"></tr>
+    <tr 
+      mat-row 
+      *matRowDef="let row; 
+      columns: tickersColumns"
+      (click)="goToTickerPreview(row)"
+      ></tr>
+  </table>
+  </ng-container>
+  
+  <ng-template #loading>
+    <mat-spinner class="loader"></mat-spinner>
+  </ng-template>
+
+</div>
